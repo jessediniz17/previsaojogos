@@ -166,20 +166,15 @@ Utilizadas para proteger informações sensíveis, como:
 * Tokens da Twilio
 * Números de WhatsApp
 
-Esses dados **não são versionados** e ficam fora do repositório GitHub.
-
 ---
 
 ## 📂 Estrutura do Projeto
 
 ```text
 previsao-futebol/
-├── app.py                # Aplicação principal Streamlit
-├── services/             # Serviços externos (APIs, WhatsApp)
-├── logic/                # Lógica de negócio e previsões
-├── data/                 # Manipulação e tratamento de dados
-├── jobs/                 # Rotinas automáticas (alertas)
+├── resultados.py         # Aplicação principal Streamlit
 ├── .env                  # Variáveis de ambiente (não versionado)
+├── .env.example          # Variáveis de ambiente
 ├── .gitignore            # Arquivos ignorados pelo Git
 └── requirements.txt      # Dependências do projeto
 ```
@@ -191,7 +186,7 @@ previsao-futebol/
 1. Clone o repositório:
 
 ```bash
-git clone https://github.com/SEU_USUARIO/football-match-prediction-streamlit.git
+git clone https://github.com/jessediniz17/previsaojogos.git
 ```
 
 2. Crie um ambiente virtual:
@@ -220,25 +215,8 @@ TWILIO_TO_WHATSAPP=["whatsapp:+55XXXXXXXXX"]
 5. Execute a aplicação:
 
 ```bash
-streamlit run app.py
+streamlit run resultados.py
 ```
 
 ---
 
-## 🚀 Possíveis Evoluções Futuras
-
-* Modelos estatísticos mais avançados (Poisson, xG)
-* Machine Learning para previsão de resultados
-* Histórico maior de partidas
-* Deploy automático no Streamlit Cloud
-* Dashboard comparativo entre times
-
----
-
-## 👤 Autor
-
-Projeto desenvolvido para fins de estudo e portfólio, com foco em **Ciência de Dados, Engenharia de Machine Learning e aplicações de IA**.
-
----
-
-⚠️ **Aviso:** Este projeto utiliza uma API não oficial do SofaScore e é destinado apenas para fins educacionais.
