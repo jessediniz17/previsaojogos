@@ -1,0 +1,7 @@
+streamlit
+requests
+pandas
+altair
+twilio
+python-dotenv
+pytz
