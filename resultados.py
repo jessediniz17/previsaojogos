@@ -65,7 +65,13 @@ with col1:
 # Buscar últimos jogos via SofaScore
 def buscar_ultimos_jogos_sofascore(team_id, num_jogos=5):
         url = f"https://api.sofascore.com/api/v1/team/{team_id}/events/last/0"
-        headers = {"User-Agent": "Mozilla/5.0"}
+        headers = headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+            "Accept": "application/json, text/plain, */*",
+            "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
+            "Referer": "https://www.sofascore.com/",
+            "Origin": "https://www.sofascore.com"
+}
         response = requests.get(url, headers=headers)
 
         if response.status_code != 200:
@@ -278,6 +284,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
