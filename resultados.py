@@ -11,10 +11,10 @@ import pytz
 st.set_page_config(page_title="Previsão de Jogos", layout="wide")
 
 #Credenciais
-account_sid = os.getenv("TWILIO_ACCOUNT_SID")
-auth_token = os.getenv("TWILIO_AUTH_TOKEN")
-from_whatsapp_number = os.getenv("TWILIO_FROM_WHATSAPP")
-to_whatsapp_number = os.getenv("TWILIO_TO_WHATSAPP")
+account_sid = "ACb42d5dd87bca5ad47e794146cfe5da15"
+auth_token = "0acc24dc6aafd38deea3d6c84cd6de0b"
+# from_whatsapp_number = 
+# to_whatsapp_number =
 
 
 client = Client(account_sid, auth_token)
@@ -276,3 +276,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
