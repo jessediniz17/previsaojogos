@@ -132,7 +132,9 @@ with col2:
 
     #Estatísticas avançadas com gráfico Altair
     def exibir_grafico_estatisticas_avancadas(historico, nome_time):
-        total_jogos = len(historico)
+    if historico.empty or "Casa/Fora" not in historico.columns:
+        st.warning(f"Dados insuficientes para gerar estatísticas de {nome_time}.")
+        return
 
         mandante = historico[historico["Casa/Fora"] == "Casa"]
         visitante = historico[historico["Casa/Fora"] == "Fora"]
@@ -276,4 +278,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
