@@ -11,10 +11,10 @@ import pytz
 st.set_page_config(page_title="Previsão de Jogos", layout="wide")
 
 #Credenciais
-account_sid = "ACb42d5dd87bca5ad47e794146cfe5da15"
-auth_token = "0acc24dc6aafd38deea3d6c84cd6de0b"
-# from_whatsapp_number = 
-# to_whatsapp_number =
+account_sid = os.getenv("TWILIO_ACCOUNT_SID")
+auth_token = os.getenv("TWILIO_AUTH_TOKEN")
+from_whatsapp_number = os.getenv("TWILIO_FROM_WHATSAPP")
+to_whatsapp_number = os.getenv("TWILIO_TO_WHATSAPP")
 
 
 client = Client(account_sid, auth_token)
@@ -65,13 +65,7 @@ with col1:
 # Buscar últimos jogos via SofaScore
 def buscar_ultimos_jogos_sofascore(team_id, num_jogos=5):
         url = f"https://api.sofascore.com/api/v1/team/{team_id}/events/last/0"
-        headers = headers = {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-            "Accept": "application/json, text/plain, */*",
-            "Accept-Language": "pt-BR,pt;q=0.9,en-US;q=0.8,en;q=0.7",
-            "Referer": "https://www.sofascore.com/",
-            "Origin": "https://www.sofascore.com"
-}
+        headers = {"User-Agent": "Mozilla/5.0"}
         response = requests.get(url, headers=headers)
 
         if response.status_code != 200:
@@ -138,9 +132,7 @@ with col2:
 
     #Estatísticas avançadas com gráfico Altair
     def exibir_grafico_estatisticas_avancadas(historico, nome_time):
-        if historico.empty or "Casa/Fora" not in historico.columns:
-            st.warning(f"Dados insuficientes para gerar estatísticas de {nome_time}.")
-            return
+        total_jogos = len(historico)
 
         mandante = historico[historico["Casa/Fora"] == "Casa"]
         visitante = historico[historico["Casa/Fora"] == "Fora"]
@@ -252,17 +244,16 @@ def verificar_jogos_no_dia(campeonato):
 #Usando a API do Twilio, envia mensagem para o WhatsApp, 
 #informando se há algum jogo dos campeonatos monitorados no dia atual
 def enviar_mensagem_whatsapp(mensagem):
-    for numero in to_whatsapp_number:
-        try:
-            message = client.messages.create(
-                body=mensagem,
-                from_=from_whatsapp_number,
-                to=numero
+    try:
+        message = client.messages.create(
+            body=mensagem,
+            from_=from_whatsapp_number,
+            to=to_whatsapp_number
                 
-            )
-            print("✅ Mensagem enviada com sucesso. SID:", message.sid)
-        except Exception as e:
-            print("❌ Erro ao enviar mensagem:", e)
+        )
+        print("✅ Mensagem enviada com sucesso. SID:", message.sid)
+    except Exception as e:
+        print("❌ Erro ao enviar mensagem:", e)
 
         
 
@@ -284,7 +275,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
-
